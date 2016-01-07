@@ -3,3 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .card { width: 200px }
+.comment-list { list-style-type: none; }
+
+.comment { 
+  border-bottom: 1px solid #ccc;
+}
+
+.comment-form {
+  margin-top: 10px;
+}

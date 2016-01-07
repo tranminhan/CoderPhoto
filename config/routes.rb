@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comments/create'
+
   devise_for :users
   resources :photos do 
     collection do
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
       put 'like'
       put 'unlike'
     end
+
+    resources :comments
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

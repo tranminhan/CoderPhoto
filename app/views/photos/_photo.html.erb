@@ -15,4 +15,22 @@
   <% else %>
     Please log in to to Like.
   <% end %>
+
+  <ul class="list-group comment-list">
+    <% photo.comments.each do |comment| %>
+      <li class="comment">
+        <% if comment.user.presence %>
+          <b><%= comment.user.email %></b>
+        <% end %>
+        <p><%= comment.content %></p>
+      </li>
+    <% end %>  
+  </ul>
+
+  <%= form_tag photo_comments_path(photo), method: "post", class: 'form-inline comment-form' do %>
+    <div class="form-group">
+      <input type="text" name="content" class="form-control" placeholder="Your comment">  
+    </div>
+  <% end %>
+
 </div>
