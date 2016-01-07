@@ -27,7 +27,7 @@
     <% end %>  
   </ul>
 
-  <%= form_tag photo_comments_path(photo), method: "post", class: 'form-inline comment-form' do %>
+  <%= form_tag photo_comments_path(photo), method: "post", class: 'form-inline comment-form', remote: true do %>
     <div class="form-group">
       <input type="text" name="content" class="form-control" placeholder="Your comment">  
     </div>
