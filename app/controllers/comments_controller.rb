@@ -17,4 +17,22 @@ class CommentsController < ApplicationController
       format.js
     end
   end
+
+  def like
+    @comment = Comment.find params[:id]
+    @like = @comment.liked_by! current_user
+    # spawn another process
+    # send email
+    # PhotoMailer.notify_likes(@vote).deliver_later
+    @photo = @comment.photo
+    render 'shared/like'
+  end
+
+  def unlike
+    @comment = Comment.find params[:id]
+    @comment.unliked_by! current_user
+    @photo = @comment.photo
+    render 'shared/like'
+  end
+
 end

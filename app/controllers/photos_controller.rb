@@ -9,11 +9,12 @@ class PhotosController < ApplicationController
     # spawn another process
     # send email
     PhotoMailer.notify_likes(@vote).deliver_later
+    render 'shared/like'
   end
 
   def unlike
     @photo = Photo.find params[:id]
     @photo.unliked_by! current_user
-    render 'like'
+    render 'shared/like'
   end
 end

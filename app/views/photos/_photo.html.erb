@@ -23,6 +23,16 @@
           <b><%= comment.user.email %></b>
         <% end %>
         <p><%= comment.content %></p>
+
+        <% if comment.has_likes? %>
+          <%= comment.likes_count %>
+        <% end %>
+        <% if comment.liked_by?(current_user) %>
+          <%= link_to "", unlike_comment_path(comment), class: 'fa fa-heart', method: 'put', remote: true %>
+        <% else %>
+          <%= link_to "", like_comment_path(comment), class: 'fa fa-heart-o', method: 'put', remote: true %>
+        <% end %>
+
       </li>
     <% end %>  
   </ul>
