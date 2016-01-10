@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  get 'comments/create'
+  resources :subscriptions, only: [:show, :destroy]
+  
+  # , only: [:show, :destroy]
+  resources :comments, only: [:create]
 
   devise_for :users
   resources :photos do 

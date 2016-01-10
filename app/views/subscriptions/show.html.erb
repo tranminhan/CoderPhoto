@@ -1,0 +1,5 @@
+<h1>Subscription preferences</h1>
+
+<%= form_tag(subscription_path(id: @user.id), method: 'delete') do %>
+  <%= submit_tag("Unsubscribe") %>
+<% end %>
