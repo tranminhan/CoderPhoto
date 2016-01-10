@@ -8,8 +8,7 @@ class CommentsController < ApplicationController
     if @photo.save
       # CommentNotifyJob.perform_later(comment)
       CommentNotifyMailer.notify_owner(comment).deliver_later
-      # CommentNotifyMailer.notify_owner(comment)
-      # CommentNotifyMailer.notify_other_commenters(comment)
+      CommentNotifyMailer.notify_other_commenters(comment).deliver_later
 
       respond_to do |format|
         format.html do

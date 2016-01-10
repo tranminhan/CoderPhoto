@@ -12,9 +12,10 @@ class CommentNotifyMailer < ApplicationMailer
     # collect distinct commenters
     # send email to them
     other_commenters_email = @comment.photo.comments.collect { |e| e.user.email } .uniq
+    debugger
     logger.debug "calling notify email to other commenters"
-    other_commenters_email do |email|
-      mail(to: "admin@example.com", subject: "#{commenter.email} commented on a photo that you also commented on!")
+    other_commenters_email.each do |email|
+      mail(to: email, subject: "#{commenter.email} commented on a photo that you also commented on!")
     end 
   end
 
