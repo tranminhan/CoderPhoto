@@ -9,4 +9,9 @@ class PhotoMailer < ApplicationMailer
     mail to: "admin@example.com", 
       subject: "#{vote.voter.email} just liked your photo."
   end
+
+  def notify_owner(comment)
+    @comment = comment
+    mail(to: "admin@example.com", subject: "someone has commented on your photo!")
+  end
 end

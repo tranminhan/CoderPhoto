@@ -6,7 +6,10 @@ class CommentsController < ApplicationController
     logger.debug "about to create a comment"
     
     if @photo.save
-      CommentNotifyJob.perform_later(comment)
+      # CommentNotifyJob.perform_later(comment)
+      CommentNotifyMailer.notify_owner(comment).deliver_later
+      # CommentNotifyMailer.notify_owner(comment)
+      # CommentNotifyMailer.notify_other_commenters(comment)
 
       respond_to do |format|
         format.html do
