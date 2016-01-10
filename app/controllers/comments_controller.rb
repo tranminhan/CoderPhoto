@@ -3,20 +3,27 @@ class CommentsController < ApplicationController
     @photo = Photo.find(params[:photo_id])
     comment = Comment.new(content: params[:content], user: current_user)
     @photo.comments << comment
+    logger.debug "about to create a comment"
     
-    respond_to do |format|
-      format.html do
-        if @photo.save
-          CommentNotifyJob.perform_later(comment)
-          redirect_to photos_path
-        else 
-          flash[:error] = "Error when commenting...."
+    if @photo.save
+      CommentNotifyJob.perform_later(comment)
+
+      respond_to do |format|
+        format.html do
           redirect_to photos_path
         end 
-      end
+        format.js {}
+      end 
 
-      format.js
-    end
+    else 
+      respond_to do |format|
+        format.html do
+          # flash[:error] = "Error when commenting...."
+          redirect_to photos_path, error: "Error when commenting...."
+        end 
+        format.js
+      end 
+    end 
   end
 
   def like
