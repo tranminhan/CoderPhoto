@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html do
         if @photo.save
+          CommentNotifyJob.perform_later(comment)
           redirect_to photos_path
         else 
           flash[:error] = "Error when commenting...."
